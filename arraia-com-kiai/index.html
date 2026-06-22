@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Arraiá com Kiai — Confirme sua presença</title>
+<meta name="description" content="Confirme sua presença e a dos seus convidados no Arraiá com Kiai do CT Coelho Shinkyokushin Karate." />
+<meta name="theme-color" content="#b81b22" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   CONFIG — edite os textos da festa em DADOS DA FESTA (HTML abaixo)
+   e cole a URL do Google Apps Script na constante SCRIPT_URL (no <script>).
+   ============================================================ */
+:root{
+  --red:#b81b22;        /* vermelho Shinkyokushin */
+  --red-dark:#8e1119;
+  --gold:#f4b41a;
+  --gold-deep:#e8901a;
+  --green:#2f8f4e;
+  --blue:#2e7fc1;
+  --navy:#15294d;
+  --ink:#2a1a12;
+  --kraft:#f6ead2;
+  --kraft-2:#efddb9;
+  --card:#fffaf0;
+  --line:#e6d3a9;
+  --muted:#7a6450;
+  --ok:#2f8f4e;
+  --radius:16px;
+  --shadow:0 8px 24px rgba(70,40,15,.12);
+  font-size:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Fredoka',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 500px at 50% -200px, rgba(244,180,26,.25), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(184,27,34,.035) 0 22px, transparent 22px 44px),
+    var(--kraft);
+  background-attachment:fixed;
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- Bandeirinhas (bunting) ---------- */
+.bunting{display:flex;width:100%;height:46px;overflow:hidden;align-items:flex-start;
+  background:
+    radial-gradient(1px 1px at 20% 60%, #fff8, transparent),
+    radial-gradient(1px 1px at 47% 35%, #fff7, transparent),
+    radial-gradient(1.5px 1.5px at 68% 55%, #fff8, transparent),
+    radial-gradient(1px 1px at 85% 40%, #fff6, transparent),
+    linear-gradient(180deg,var(--navy),#1c356190)}
+.bunting span{flex:1 0 auto;height:28px;width:28px;clip-path:polygon(0 0,100% 0,50% 100%);filter:drop-shadow(0 3px 2px rgba(0,0,0,.22))}
+.bunting span:nth-child(5n+1){background:var(--red)}
+.bunting span:nth-child(5n+2){background:var(--gold)}
+.bunting span:nth-child(5n+3){background:var(--green)}
+.bunting span:nth-child(5n+4){background:var(--blue)}
+.bunting span:nth-child(5n+5){background:var(--gold-deep)}
+
+.wrap{max-width:560px;margin:0 auto;padding:0 16px 48px}
+
+/* ---------- Hero (arte da festa) ---------- */
+.hero-art{display:block;width:100%;height:auto;margin:0;border:0;border-radius:0}
+
+/* ---------- Header (fallback quando a arte não está disponível) ---------- */
+.emblem{width:84px;height:84px;margin:0 auto 8px;display:block;filter:drop-shadow(0 4px 6px rgba(0,0,0,.2))}
+.kanji{font-family:'Fredoka';font-weight:600;letter-spacing:.32em;font-size:1.15rem;color:var(--ink);margin:0 0 1px;padding-left:.32em}
+.kicker{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:600;margin:0}
+h1{font-family:'Rye',serif;font-weight:400;color:var(--red);font-size:2.6rem;line-height:1;margin:.12em 0 .1em;text-shadow:1px 1px 0 var(--gold),2px 3px 0 rgba(0,0,0,.08)}
+.dojo{font-size:.95rem;color:var(--ink);font-weight:500;margin:0 0 6px;opacity:.85}
+.when{text-align:center;font-weight:500;color:var(--ink);margin:12px 0 2px;font-size:1rem}
+.when b{color:var(--red)}
+
+/* ---------- Info da festa ---------- */
+.festa-info{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:6px auto 4px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:7px 13px;font-size:.86rem;font-weight:500;box-shadow:0 2px 0 rgba(0,0,0,.04)}
+.chip svg{width:15px;height:15px;color:var(--red)}
+
+/* ---------- Cards ---------- */
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 16px;margin-top:18px;position:relative}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:7px;border-radius:var(--radius) var(--radius) 0 0;
+  background:repeating-linear-gradient(45deg,var(--red) 0 14px,#fff 14px 28px,var(--gold) 28px 42px,#fff 42px 56px)}
+.card-title{display:flex;align-items:center;gap:9px;font-weight:600;font-size:1.12rem;color:var(--red-dark);margin:6px 0 14px}
+.card-title .n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;font-size:.9rem;font-weight:600;flex:0 0 auto}
+
+/* ---------- Form ---------- */
+label{display:block;font-size:.82rem;font-weight:500;color:var(--muted);margin:0 0 5px}
+.row{display:flex;gap:10px}
+.row .field{flex:1}
+.field{margin-bottom:13px}
+input,select{
+  width:100%;font-family:inherit;font-size:1rem;color:var(--ink);
+  padding:12px 13px;border:1.5px solid var(--line);border-radius:11px;background:#fff;
+  appearance:none;-webkit-appearance:none;transition:border-color .15s,box-shadow .15s;
+}
+input:focus,select:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(184,27,34,.13)}
+input::placeholder{color:#b8a78f}
+select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b81b22' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 12px center;background-size:18px;padding-right:40px}
+
+/* ---------- Convidados ---------- */
+#guests{display:flex;flex-direction:column;gap:14px}
+.guest{border:1.5px dashed var(--line);border-radius:13px;padding:13px 13px 4px;background:linear-gradient(#fffdf6,#fff8e9);position:relative}
+.guest .ghead{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.guest .gtag{font-size:.78rem;font-weight:600;color:var(--gold-deep);text-transform:uppercase;letter-spacing:.06em}
+.rm{border:none;background:transparent;color:var(--red);font-size:.82rem;font-weight:600;cursor:pointer;padding:4px 6px;border-radius:8px;display:inline-flex;align-items:center;gap:4px}
+.rm:hover{background:rgba(184,27,34,.08)}
+.empty-guests{color:var(--muted);font-size:.9rem;text-align:center;padding:6px 0 12px;font-style:italic}
+
+.btn-add{width:100%;margin-top:14px;border:1.5px solid var(--red);background:#fff;color:var(--red);font-family:inherit;font-weight:600;font-size:.98rem;padding:12px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s}
+.btn-add:hover{background:rgba(184,27,34,.06)}
+
+/* ---------- Total + Submit ---------- */
+.total{display:flex;align-items:center;justify-content:center;gap:8px;margin:18px 0 4px;font-weight:500;color:var(--ink)}
+.total b{font-family:'Rye',serif;color:var(--red);font-size:1.5rem;font-weight:400}
+.submit{width:100%;margin-top:14px;border:none;background:linear-gradient(180deg,var(--red),var(--red-dark));color:#fff;font-family:'Fredoka';font-weight:600;font-size:1.12rem;padding:16px;border-radius:14px;cursor:pointer;box-shadow:0 6px 16px rgba(184,27,34,.35);transition:transform .08s,box-shadow .15s}
+.submit:active{transform:translateY(1px)}
+.submit:disabled{opacity:.65;cursor:default}
+
+.note{text-align:center;color:var(--muted);font-size:.8rem;margin:14px 6px 0}
+footer{text-align:center;margin-top:26px;color:var(--muted);font-size:.78rem}
+footer .osu{font-family:'Rye',serif;color:var(--red);font-size:1rem}
+
+/* ---------- Success ---------- */
+.success{display:none;text-align:center;padding:30px 18px}
+.success.show{display:block;animation:pop .4s ease}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.success .ico{width:84px;height:84px;margin:0 auto 16px;border-radius:50%;background:var(--ok);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(47,143,78,.35)}
+.success .ico svg{width:46px;height:46px;color:#fff}
+.success h2{font-family:'Rye',serif;color:var(--green);font-size:1.9rem;font-weight:400;margin:.1em 0}
+.success p{color:var(--ink);margin:.3em auto 1em;max-width:340px}
+.btn-again{border:1.5px solid var(--green);background:#fff;color:var(--green);font-family:inherit;font-weight:600;padding:11px 20px;border-radius:11px;cursor:pointer}
+
+.err{display:none;background:#fdeaea;border:1.5px solid #f3c2c2;color:#9b1c1c;border-radius:11px;padding:11px 13px;font-size:.88rem;margin-top:12px}
+.err.show{display:block}
+
+@media (min-width:600px){ h1{font-size:3.1rem} .emblem{width:92px;height:92px} }
+</style>
+</head>
+<body>
+
+<!-- ============ BANNER / ARTE DA FESTA (full-bleed) ============ -->
+<img class="hero-art" src="arte.jpg" alt="Arraiá com Kiai — Karatê Shinkyokushin" />
+
+<div class="wrap">
+  <!-- ====================== DADOS DA FESTA ====================== -->
+  <p class="when"><b>Sábado, 04 de julho</b> · a partir das 17h</p>
+  <div class="festa-info">
+    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="info-data">04/07 · sáb</span></span>
+    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="info-hora">17h</span></span>
+    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg><span id="info-local">Casa do Miguel · Ingleses</span></span>
+  </div>
+  <!-- =========================================================== -->
+
+  <!-- ============ FORM ============ -->
+  <form id="form" novalidate>
+
+    <section class="card">
+      <div class="card-title"><span class="n">1</span> Quem está confirmando</div>
+      <div class="field">
+        <label for="r-nome">Seu nome completo</label>
+        <input id="r-nome" name="r-nome" type="text" autocomplete="name" placeholder="Ex.: Eduardo Penna" required />
+      </div>
+      <div class="row">
+        <div class="field" style="flex:0 0 96px">
+          <label for="r-idade">Idade</label>
+          <input id="r-idade" name="r-idade" type="number" inputmode="numeric" min="0" max="120" placeholder="00" required />
+        </div>
+        <div class="field">
+          <label for="r-tel">Telefone (WhatsApp)</label>
+          <input id="r-tel" name="r-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" required />
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-title"><span class="n">2</span> Seus convidados</div>
+      <div id="guests"></div>
+      <p class="empty-guests" id="empty-msg">Nenhum convidado ainda — vai sozinho(a) ou adicione abaixo. 👇</p>
+      <button type="button" class="btn-add" id="add">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        Adicionar convidado
+      </button>
+    </section>
+
+    <div class="total">Total na sua confirmação: <b id="total">1</b> <span id="total-lbl">pessoa</span></div>
+
+    <button type="submit" class="submit" id="submit">Confirmar presença 🥋</button>
+    <div class="err" id="err"></div>
+    <p class="note">Seus dados vão direto para a planilha da organização. Sem login, sem complicação.</p>
+  </form>
+
+  <!-- ============ SUCCESS ============ -->
+  <div class="success" id="success">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h2>Presença confirmada!</h2>
+    <p id="success-msg">Te esperamos no arraiá. Osu! 🎊</p>
+    <button class="btn-again" id="again">Confirmar outra família</button>
+  </div>
+
+  <footer>
+    <span class="osu">Osu!</span><br/>
+    Karatê Shinkyokushin · Arraiá com Kiai
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   1) Cole aqui a URL do seu Google Apps Script (Web App).
+      Passo a passo no arquivo apps-script.gs / README.md desta pasta.
+   ============================================================ */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz6BVzioeuPPAp1EgAiwA7OALOLNQXTJqRQNEvFGcol_yq4SPNReQhsKLm05h3ng__g7A/exec";
+
+const RELACOES = ["Pai","Mãe","Filho(a)","Irmão(ã)","Cônjuge/Companheiro(a)","Avô/Avó","Amigo(a)","Outro"];
+
+const guestsEl = document.getElementById('guests');
+const emptyMsg = document.getElementById('empty-msg');
+const totalEl  = document.getElementById('total');
+const totalLbl = document.getElementById('total-lbl');
+let guestSeq = 0;
+
+function relacaoOptions(){
+  return RELACOES.map(r=>`<option value="${r}">${r}</option>`).join('');
+}
+
+function addGuest(){
+  guestSeq++;
+  const div = document.createElement('div');
+  div.className = 'guest';
+  div.dataset.id = guestSeq;
+  div.innerHTML = `
+    <div class="ghead">
+      <span class="gtag">Convidado</span>
+      <button type="button" class="rm" aria-label="Remover convidado">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg> Remover
+      </button>
+    </div>
+    <div class="field">
+      <label>Nome</label>
+      <input type="text" class="g-nome" placeholder="Nome do convidado" required />
+    </div>
+    <div class="row">
+      <div class="field" style="flex:0 0 96px">
+        <label>Idade</label>
+        <input type="number" class="g-idade" inputmode="numeric" min="0" max="120" placeholder="00" required />
+      </div>
+      <div class="field">
+        <label>Relação com você</label>
+        <select class="g-relacao" required>${relacaoOptions()}</select>
+      </div>
+    </div>`;
+  guestsEl.appendChild(div);
+  div.querySelector('.rm').addEventListener('click',()=>{ div.remove(); refresh(); });
+  div.querySelector('.g-nome').focus();
+  refresh();
+}
+
+function refresh(){
+  const n = guestsEl.children.length;
+  emptyMsg.style.display = n ? 'none' : 'block';
+  guestsEl.querySelectorAll('.guest').forEach((g,i)=>{ g.querySelector('.gtag').textContent = 'Convidado ' + (i+1); });
+  const total = 1 + n;
+  totalEl.textContent = total;
+  totalLbl.textContent = total === 1 ? 'pessoa' : 'pessoas';
+}
+
+document.getElementById('add').addEventListener('click', addGuest);
+
+/* submit */
+const form = document.getElementById('form');
+const errEl = document.getElementById('err');
+const submitBtn = document.getElementById('submit');
+
+function showErr(msg){ errEl.textContent = msg; errEl.classList.add('show'); }
+function clearErr(){ errEl.classList.remove('show'); }
+
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  clearErr();
+
+  const nome = document.getElementById('r-nome').value.trim();
+  const idade = document.getElementById('r-idade').value.trim();
+  const tel = document.getElementById('r-tel').value.trim();
+  if(!nome || !idade || !tel){ showErr('Preencha seu nome, idade e telefone.'); return; }
+
+  const convidados = [];
+  let invalid = false;
+  guestsEl.querySelectorAll('.guest').forEach(g=>{
+    const gn = g.querySelector('.g-nome').value.trim();
+    const gi = g.querySelector('.g-idade').value.trim();
+    const gr = g.querySelector('.g-relacao').value;
+    if(!gn || !gi){ invalid = true; }
+    convidados.push({ nome: gn, idade: gi, relacao: gr });
+  });
+  if(invalid){ showErr('Complete o nome e a idade de cada convidado (ou remova os vazios).'); return; }
+
+  const payload = {
+    responsavel: { nome, idade, telefone: tel },
+    convidados,
+    total: 1 + convidados.length,
+    enviadoEm: new Date().toISOString()
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando…';
+
+  try{
+    if(SCRIPT_URL.startsWith('http')){
+      await fetch(SCRIPT_URL, {
+        method:'POST',
+        mode:'no-cors',
+        headers:{ 'Content-Type':'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+    } else {
+      console.warn('SCRIPT_URL não configurada — payload:', payload);
+      await new Promise(r=>setTimeout(r,500));
+    }
+    document.getElementById('success-msg').textContent =
+      `Valeu, ${nome.split(' ')[0]}! ${payload.total === 1 ? 'Sua presença está' : `Vocês ${payload.total} estão`} confirmada${payload.total===1?'':'s'}. Te esperamos no arraiá. Osu! 🎊`;
+    form.style.display = 'none';
+    document.getElementById('success').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }catch(err){
+    showErr('Não consegui enviar agora. Verifique a conexão e tente de novo.');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Confirmar presença 🥋';
+  }
+});
+
+document.getElementById('again').addEventListener('click',()=>{
+  form.reset();
+  guestsEl.innerHTML = '';
+  document.getElementById('success').classList.remove('show');
+  form.style.display = 'block';
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Confirmar presença 🥋';
+  refresh();
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+refresh();
+</script>
+</body>
+</html>
