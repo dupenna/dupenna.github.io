@@ -172,7 +172,7 @@ footer .osu{font-family:'Rye',serif;color:var(--red);font-size:1rem}
         </div>
         <div class="field">
           <label for="r-tel">Telefone (WhatsApp)</label>
-          <input id="r-tel" name="r-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" required />
+          <input id="r-tel" name="r-tel" type="tel" inputmode="tel" autocomplete="tel" maxlength="15" placeholder="(00) 00000-0000" required />
         </div>
       </div>
     </section>
@@ -270,6 +270,17 @@ function refresh(){
 
 document.getElementById('add').addEventListener('click', addGuest);
 
+/* máscara de telefone BR: (00) 0000-0000 (fixo) ou (00) 00000-0000 (celular) */
+function maskPhone(v){
+  const d = v.replace(/\D/g,'').slice(0,11);
+  if(d.length<=2)  return d.replace(/^(\d{0,2})/, '($1');
+  if(d.length<=6)  return d.replace(/^(\d{2})(\d{0,4})/, '($1) $2');
+  if(d.length<=10) return d.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+  return d.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+}
+const telEl = document.getElementById('r-tel');
+telEl.addEventListener('input', ()=>{ telEl.value = maskPhone(telEl.value); });
+
 /* submit */
 const form = document.getElementById('form');
 const errEl = document.getElementById('err');
@@ -286,6 +297,13 @@ form.addEventListener('submit', async (e)=>{
   const idade = document.getElementById('r-idade').value.trim();
   const tel = document.getElementById('r-tel').value.trim();
   if(!nome || !idade || !tel){ showErr('Preencha seu nome, idade e telefone.'); return; }
+
+  const telDigits = tel.replace(/\D/g,'');
+  if(telDigits.length < 10 || telDigits.length > 11){
+    showErr('Telefone inválido. Inclua o DDD, ex.: (48) 99999-0000.');
+    document.getElementById('r-tel').focus();
+    return;
+  }
 
   const convidados = [];
   let invalid = false;
