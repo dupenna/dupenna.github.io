@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Arraiá com Kiai — O que você vai levar?</title>
+<meta name="description" content="Escolha os pratos que você vai levar para o Arraiá com Kiai do Karatê Shinkyokushin." />
+<meta name="theme-color" content="#b81b22" />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --red:#b81b22; --red-dark:#8e1119; --gold:#f4b41a; --gold-deep:#e8901a;
+  --green:#2f8f4e; --blue:#2e7fc1; --navy:#15294d;
+  --ink:#2a1a12; --kraft:#f6ead2; --card:#fffaf0; --line:#e6d3a9; --muted:#7a6450;
+  --radius:16px; --shadow:0 8px 24px rgba(70,40,15,.12);
+  font-size:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Fredoka',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);
+  background:
+    radial-gradient(1200px 500px at 50% -200px, rgba(244,180,26,.25), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(184,27,34,.035) 0 22px, transparent 22px 44px),
+    var(--kraft);
+  background-attachment:fixed;line-height:1.45;-webkit-font-smoothing:antialiased;padding-bottom:96px;
+}
+.bunting{display:flex;width:100%;height:46px;overflow:hidden;align-items:flex-start;
+  background:
+    radial-gradient(1px 1px at 20% 60%, #fff8, transparent),
+    radial-gradient(1px 1px at 47% 35%, #fff7, transparent),
+    radial-gradient(1.5px 1.5px at 68% 55%, #fff8, transparent),
+    radial-gradient(1px 1px at 85% 40%, #fff6, transparent),
+    linear-gradient(180deg,var(--navy),#1c356190)}
+.bunting span{flex:1 0 auto;height:28px;width:28px;clip-path:polygon(0 0,100% 0,50% 100%);filter:drop-shadow(0 3px 2px rgba(0,0,0,.22))}
+.bunting span:nth-child(5n+1){background:var(--red)}
+.bunting span:nth-child(5n+2){background:var(--gold)}
+.bunting span:nth-child(5n+3){background:var(--green)}
+.bunting span:nth-child(5n+4){background:var(--blue)}
+.bunting span:nth-child(5n+5){background:var(--gold-deep)}
+
+.hero-art{display:block;width:100%;max-width:560px;height:auto;margin:0 auto;border:0}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px}
+
+header{text-align:center;padding:16px 8px 2px}
+.kicker{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);font-weight:600;margin:0}
+h1{font-family:'Rye',serif;font-weight:400;color:var(--red);font-size:1.9rem;line-height:1.05;margin:.18em 0 .15em;text-shadow:1px 1px 0 var(--gold)}
+.sub{font-size:.95rem;color:var(--ink);opacity:.85;margin:0 0 4px}
+
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-top:16px;position:relative}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:7px;border-radius:var(--radius) var(--radius) 0 0;
+  background:repeating-linear-gradient(45deg,var(--red) 0 14px,#fff 14px 28px,var(--gold) 28px 42px,#fff 42px 56px)}
+
+/* Confirmação do participante */
+.hello{font-weight:600;font-size:1.15rem;color:var(--red-dark);margin:4px 0 8px}
+.people{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:6px}
+.person{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.9rem;font-weight:500}
+.person .rel{color:var(--muted);font-size:.82rem}
+.person.you{border-color:var(--red);background:rgba(184,27,34,.06)}
+.count{font-size:.86rem;color:var(--muted);margin-top:2px}
+.count b{color:var(--red)}
+
+.intro{font-size:.92rem;color:var(--ink);margin:14px 4px 2px;text-align:center}
+
+/* Categorias e pratos */
+.cat-title{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--red-dark);font-size:1.05rem;margin:20px 4px 8px}
+.cat-title::after{content:"";flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--gold) 0 8px,transparent 8px 14px)}
+.dish{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--line);border-radius:13px;padding:10px 12px;margin-bottom:9px}
+.dish.full{opacity:.55}
+.dish.picked{border-color:var(--red);box-shadow:0 0 0 2px rgba(184,27,34,.12)}
+.dish .info{flex:1;min-width:0}
+.dish .nm{font-weight:600;font-size:.98rem;line-height:1.2}
+.dish .meta{font-size:.78rem;color:var(--muted);margin-top:2px}
+.dish .meta .falta{color:var(--gold-deep);font-weight:600}
+.dish .meta .ok{color:var(--green);font-weight:600}
+.dish .un{font-size:.74rem;color:var(--muted)}
+
+.stepper{display:flex;align-items:center;gap:0;flex:0 0 auto;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:#fff}
+.stepper button{width:34px;height:34px;border:0;background:#fff;color:var(--red);font-size:1.2rem;font-weight:700;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center}
+.stepper button:disabled{color:#cdbfa6;cursor:default}
+.stepper .q{min-width:30px;text-align:center;font-weight:600;font-size:1rem;color:var(--ink)}
+.dish.full .stepper{display:none}
+.dish.full .tag-ok{flex:0 0 auto;color:var(--green);font-weight:600;font-size:.82rem;display:inline-flex;align-items:center;gap:4px}
+
+/* Barra fixa */
+.bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,250,240,.97);backdrop-filter:blur(6px);border-top:1.5px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:20}
+.bar .inner{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.bar .summary{flex:1;font-size:.9rem;color:var(--ink)}
+.bar .summary b{color:var(--red);font-family:'Rye',serif;font-weight:400;font-size:1.2rem}
+.submit{border:none;background:linear-gradient(180deg,var(--red),var(--red-dark));color:#fff;font-family:'Fredoka';font-weight:600;font-size:1rem;padding:13px 20px;border-radius:12px;cursor:pointer;box-shadow:0 6px 16px rgba(184,27,34,.32);white-space:nowrap}
+.submit:disabled{opacity:.5;cursor:default;box-shadow:none}
+
+.success{display:none;text-align:center;padding:26px 16px}
+.success.show{display:block;animation:pop .4s ease}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.success .ico{width:80px;height:80px;margin:0 auto 14px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(47,143,78,.35)}
+.success .ico svg{width:44px;height:44px;color:#fff}
+.success h2{font-family:'Rye',serif;color:var(--green);font-size:1.7rem;font-weight:400;margin:.1em 0}
+.success ul{list-style:none;padding:0;margin:14px auto;max-width:340px;text-align:left}
+.success li{background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:9px 12px;margin-bottom:7px;font-weight:500;display:flex;justify-content:space-between}
+.success li b{color:var(--red)}
+.btn-ghost{border:1.5px solid var(--green);background:#fff;color:var(--green);font-family:inherit;font-weight:600;padding:10px 18px;border-radius:11px;cursor:pointer;margin-top:6px}
+
+.errbox{max-width:560px;margin:40px auto;padding:0 20px;text-align:center;color:var(--muted)}
+footer{text-align:center;margin:22px 0 8px;color:var(--muted);font-size:.78rem}
+footer .osu{font-family:'Rye',serif;color:var(--red);font-size:1rem}
+@media (min-width:600px){ h1{font-size:2.3rem} }
+</style>
+</head>
+<body>
+
+<div class="bunting" id="bunting" aria-hidden="true"></div>
+<img class="hero-art" src="arte.jpg" alt="Arraiá com Kiai" />
+
+<div id="app" class="wrap" style="display:none">
+  <header>
+    <p class="kicker">Karatê Shinkyokushin · Arraiá com Kiai</p>
+    <h1>O que você vai levar? 🥘</h1>
+    <p class="sub">Sábado, 04/07 · 17h · Rio Vermelho</p>
+  </header>
+
+  <section class="card" id="who">
+    <div class="hello" id="hello">Olá! 👋</div>
+    <div class="people" id="people"></div>
+    <div class="count" id="count"></div>
+  </section>
+
+  <p class="intro">Escolha <b>um ou mais pratos</b> que você vai levar. Os números mostram a quantidade sugerida e o que ainda <b>falta</b>. 🤝</p>
+
+  <div id="menu"></div>
+
+  <footer>
+    <span class="osu">Osu!</span><br/>Obrigado por ajudar a fazer um arraiá de respeito 🎊
+  </footer>
+</div>
+
+<div class="success wrap" id="success">
+  <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></div>
+  <h2 id="success-title">Anotado!</h2>
+  <p id="success-msg"></p>
+  <ul id="success-list"></ul>
+  <button class="btn-ghost" id="edit">Alterar minha escolha</button>
+</div>
+
+<div class="errbox" id="errbox" style="display:none">
+  <h2 style="font-family:'Rye',serif;color:var(--red);font-weight:400">Link inválido 😕</h2>
+  <p>Esse link não tem os dados da sua confirmação. Peça pra organização te reenviar o seu link pessoal.</p>
+</div>
+
+<div class="bar" id="bar" style="display:none">
+  <div class="inner">
+    <div class="summary">Você vai levar: <b id="tot">0</b> <span id="totlbl">item</span></div>
+    <button class="submit" id="submit" disabled>Confirmar</button>
+  </div>
+</div>
+
+<script>
+/* Endpoint para registrar os pratos escolhidos.
+   VAZIO = modo teste (mostra o sucesso, mas NÃO grava — pra não sujar a aba
+   Confirmações). Quando o Apps Script tratar tipo:'pratos', cole aqui a URL /exec. */
+const PRATOS_URL = "";
+
+/* Cardápio (mesma fonte da aba "Cardápio sugerido"): [categoria, prato, unidade, rende] */
+const CARDAPIO = [
+  ["Salgados","Mini hot dog / cachorro quente","bandeja (~20un)",10],
+  ["Salgados","Mini cuscuz paulista","travessa",12],
+  ["Salgados","Mini carne louca","travessa",12],
+  ["Salgados","Coxinha","porção (~25un)",12],
+  ["Salgados","Pérolas de queijo","porção (~30un)",12],
+  ["Salgados","Pastelzinho de carne c/ queijo","porção (~30un)",12],
+  ["Salgados","Milho verde","panela (~20 espigas)",10],
+  ["Salgados","Batata frita","porção grande",8],
+  ["Salgados","Espetinho de carne","espeto",1],
+  ["Salgados","Caldo verde","panela (~3L)",15],
+  ["Salgados","Escondidinho de carne seca c/ mandioca","travessa",12],
+  ["Salgados","Pinhão","porção (~500g)",5],
+  ["Doces caseiros","Bolo de milho","bolo",12],
+  ["Doces caseiros","Bolo de fubá","bolo",12],
+  ["Doces caseiros","Canjica","panela (~3L)",15],
+  ["Doces caseiros","Arroz doce","panela (~3L)",15],
+  ["Doces caseiros","Churros","porção (~20un)",12],
+  ["Doces caseiros","Curau","travessa",15],
+  ["Doces caseiros","Brigadeiro de copinho","porção (~20un)",12],
+  ["Doces de festa","Paçoca","pacote (~20un)",15],
+  ["Doces de festa","Pé de moleque","pacote (~15un)",12],
+  ["Doces de festa","Amendoim","porção (~1kg)",15],
+  ["Doces de festa","Pipoca","porção grande",12],
+  ["Doces de festa","Cocada","porção (~15un)",15],
+  ["Doces de festa","Maria mole","pacote",15],
+  ["Doces de festa","Doce de leite","pote",15],
+  ["Doces de festa","Doce de abóbora","travessa",15],
+  ["Doces de festa","Doce de batata","travessa",15],
+  ["Bebidas","Coca-Cola","garrafa 2L",8],
+  ["Bebidas","Coca-Cola Zero","garrafa 2L",8],
+  ["Bebidas","Guaraná","garrafa 2L",8],
+  ["Bebidas","Guaraná Zero","garrafa 2L",8],
+  ["Bebidas","Suco de uva","garrafa/litro",8],
+  ["Bebidas","Suco de laranja","garrafa/litro",8]
+];
+
+/* bandeirinhas */
+const bEl=document.getElementById('bunting');
+for(let i=0;i<22;i++) bEl.appendChild(document.createElement('span'));
+
+function b64urlDecode(s){
+  s=s.replace(/-/g,'+').replace(/_/g,'/'); while(s.length%4)s+='=';
+  const bin=atob(s); const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+
+let DATA=null;
+try{
+  const p=new URLSearchParams(location.search).get('d');
+  if(p) DATA=JSON.parse(b64urlDecode(p));
+}catch(e){ DATA=null; }
+
+const picks={}; // prato -> qtd
+
+if(!DATA || !DATA.nome){
+  document.getElementById('errbox').style.display='block';
+}else{
+  renderApp(DATA);
+}
+
+function renderApp(d){
+  document.getElementById('app').style.display='block';
+  document.getElementById('bar').style.display='block';
+
+  document.getElementById('hello').textContent = 'Olá, ' + (d.primeiro || d.nome.split(' ')[0]) + '! 👋';
+
+  const peopleEl=document.getElementById('people');
+  (d.pessoas||[]).forEach((p,i)=>{
+    const s=document.createElement('span');
+    s.className='person'+(i===0?' you':'');
+    s.innerHTML = '🥋 '+p.n+(p.r?' <span class="rel">('+p.r+')</span>':'');
+    peopleEl.appendChild(s);
+  });
+  const total=(d.pessoas||[]).length;
+  document.getElementById('count').innerHTML='Presença confirmada para <b>'+total+(total===1?' pessoa':' pessoas')+'</b>.';
+
+  const part=d.participantes||0;
+  const assumido=d.assumido||{};
+  const menu=document.getElementById('menu');
+  let cat=null;
+  CARDAPIO.forEach(row=>{
+    const [c,prato,un,rende]=row;
+    const max=part>0?Math.ceil(part/rende):0;
+    const falta=Math.max(0,max-(assumido[prato]||0));
+    if(c!==cat){ cat=c; const h=document.createElement('div'); h.className='cat-title'; h.textContent=c; menu.appendChild(h); }
+    const dish=document.createElement('div');
+    dish.className='dish'+(falta<=0?' full':'');
+    dish.dataset.prato=prato;
+    const metaTxt = falta>0
+      ? 'sugerido: '+max+' · <span class="falta">falta '+falta+'</span>'
+      : '<span class="ok">já completo ✓</span>';
+    dish.innerHTML =
+      '<div class="info"><div class="nm">'+prato+'</div>'+
+      '<div class="meta">'+metaTxt+'</div>'+
+      '<div class="un">unidade: '+un+'</div></div>'+
+      (falta>0
+        ? '<div class="stepper"><button class="minus" aria-label="menos">−</button><span class="q">0</span><button class="plus" aria-label="mais">+</button></div>'
+        : '<span class="tag-ok">completo ✓</span>');
+    menu.appendChild(dish);
+
+    if(falta>0){
+      const q=dish.querySelector('.q'), minus=dish.querySelector('.minus'), plus=dish.querySelector('.plus');
+      const upd=()=>{
+        const v=picks[prato]||0;
+        q.textContent=v;
+        minus.disabled=v<=0; plus.disabled=v>=falta;
+        dish.classList.toggle('picked',v>0);
+        refresh();
+      };
+      minus.onclick=()=>{ picks[prato]=Math.max(0,(picks[prato]||0)-1); if(!picks[prato])delete picks[prato]; upd(); };
+      plus.onclick=()=>{ picks[prato]=Math.min(falta,(picks[prato]||0)+1); upd(); };
+      upd();
+    }
+  });
+}
+
+function selecionados(){ return Object.keys(picks).filter(k=>picks[k]>0); }
+
+function refresh(){
+  const items=selecionados();
+  const tot=items.reduce((a,k)=>a+picks[k],0);
+  document.getElementById('tot').textContent=tot;
+  document.getElementById('totlbl').textContent = tot===1?'item':'itens';
+  document.getElementById('submit').disabled = items.length===0;
+}
+
+document.getElementById('submit').addEventListener('click', async ()=>{
+  const items=selecionados().map(prato=>({prato, qtd:picks[prato]}));
+  if(!items.length) return;
+  const btn=document.getElementById('submit');
+  btn.disabled=true; btn.textContent='Enviando…';
+
+  const payload={
+    tipo:'pratos',
+    grupo: DATA.grupo||'', responsavel: DATA.nome, telefone: DATA.tel||'',
+    itens: items, enviadoEm: new Date().toISOString()
+  };
+  try{
+    if(PRATOS_URL.startsWith('http')){
+      await fetch(PRATOS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+    }
+  }catch(e){}
+
+  // sucesso
+  document.getElementById('app').style.display='none';
+  document.getElementById('bar').style.display='none';
+  const list=document.getElementById('success-list'); list.innerHTML='';
+  items.forEach(it=>{
+    const li=document.createElement('li');
+    li.innerHTML='<span>'+it.prato+'</span><b>'+it.qtd+'×</b>';
+    list.appendChild(li);
+  });
+  document.getElementById('success-title').textContent='Valeu, '+(DATA.primeiro||DATA.nome.split(' ')[0])+'! 🎉';
+  document.getElementById('success-msg').textContent='Anotamos o que você vai levar. Obrigado! Osu! 🥋';
+  document.getElementById('success').classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+document.getElementById('edit').addEventListener('click',()=>{
+  document.getElementById('success').classList.remove('show');
+  document.getElementById('app').style.display='block';
+  document.getElementById('bar').style.display='block';
+  const btn=document.getElementById('submit'); btn.textContent='Confirmar'; refresh();
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
