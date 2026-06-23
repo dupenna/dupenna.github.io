@@ -177,7 +177,9 @@ function crc16(str){
   return crc.toString(16).toUpperCase().padStart(4,'0');
 }
 function buildBrCode(valor){
-  const txid = normTxid((DATA && (DATA.primeiro || (DATA.nome||'').split(' ')[0])) || 'ARRAIA');
+  const _p = ascii((DATA && DATA.nome) || '').toUpperCase().replace(/[^A-Z0-9 ]/g,' ').trim().split(/\s+/).filter(Boolean);
+  const _base = _p.length>=2 ? (_p[0]+_p[_p.length-1]) : (_p[0]||'');
+  const txid = normTxid('ARRAIA'+_base);
   let p = tlv("00","01")
         + tlv("26", tlv("00","br.gov.bcb.pix") + tlv("01", PIX_KEY))
         + tlv("52","0000") + tlv("53","986");
