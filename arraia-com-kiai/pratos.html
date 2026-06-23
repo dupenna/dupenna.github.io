@@ -112,7 +112,6 @@ footer .osu{font-family:'Rye',serif;color:var(--red);font-size:1rem}
 </head>
 <body>
 
-<div class="bunting" id="bunting" aria-hidden="true"></div>
 <img class="hero-art" src="banner.jpg" onerror="this.onerror=null;this.src='arte.jpg'" alt="Arraiá com Kiai" />
 
 <div id="app" class="wrap" style="display:none">
@@ -198,9 +197,6 @@ const CARDAPIO = [
   ["Bebidas","Suco de uva","garrafa/litro",8],
   ["Bebidas","Suco de laranja","garrafa/litro",8]
 ];
-
-const bEl=document.getElementById('bunting');
-for(let i=0;i<22;i++) bEl.appendChild(document.createElement('span'));
 
 function b64urlDecode(s){ s=s.replace(/-/g,'+').replace(/_/g,'/'); while(s.length%4)s+='=';
   const bin=atob(s); const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0)); return new TextDecoder().decode(bytes); }
