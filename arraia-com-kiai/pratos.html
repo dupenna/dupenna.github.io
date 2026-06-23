@@ -262,13 +262,10 @@ function onCardapio(itens, offline){
 }
 
 function renderGuide(){
-  const avail=ITENS.filter(i=>i.falta>0);
-  let ex='';
-  if(avail.length>=2 && REC>=2){ ex='<span class="ex">Ex.: <b>'+(REC-1)+'× '+avail[0].prato+'</b> + <b>1× '+avail[1].prato+'</b>.</span>'; }
-  else if(avail.length>=1){ ex='<span class="ex">Ex.: <b>'+REC+'× '+avail[0].prato+'</b>.</span>'; }
   document.getElementById('guide').innerHTML=
     '<span class="big">🎯 Você confirmou '+REC+(REC===1?' pessoa':' pessoas')+'.</span> '+
-    'O ideal é trazer cerca de <b>'+REC+(REC===1?' item':' itens')+'</b> no total (pode somar pratos diferentes). '+ex;
+    'O ideal é trazer cerca de <b>'+REC+(REC===1?' item':' itens')+'</b> no total (pode somar pratos diferentes). '+
+    '<span class="ex">Ex.: <b>2× Bolo de fubá</b> + <b>1× Paçoca</b>.</span>';
 }
 
 function renderMenu(){
