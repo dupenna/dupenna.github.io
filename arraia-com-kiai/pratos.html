@@ -201,20 +201,44 @@ const CARDAPIO = [
 function b64urlDecode(s){ s=s.replace(/-/g,'+').replace(/_/g,'/'); while(s.length%4)s+='=';
   const bin=atob(s); const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0)); return new TextDecoder().decode(bytes); }
 
-let DATA=null;
-try{ const p=new URLSearchParams(location.search).get('d'); if(p) DATA=JSON.parse(b64urlDecode(p)); }catch(e){ DATA=null; }
-
 const picks={};       // prato -> qtd
-let ITENS=[];         // [{cat,prato,un,max,falta}]
-let REC=0;            // total recomendado (= nº de pessoas)
+let DATA=null, ITENS=[], REC=0;
 
-if(!DATA || !DATA.nome){
-  document.getElementById('errbox').style.display='block';
-}else{
+const params=new URLSearchParams(location.search);
+const dParam=params.get('d'), rParam=params.get('r');
+
+function iniciar(){
   renderHeader(DATA);
   REC=(DATA.pessoas||[]).length || DATA.participantes || 1;
   document.getElementById('rec').textContent=REC;
   loadCardapio(onCardapio);
+}
+function erro(){
+  document.getElementById('app').style.display='none';
+  document.getElementById('bar').style.display='none';
+  document.getElementById('errbox').style.display='block';
+}
+
+if(dParam){                                   // link antigo (dados embutidos) — fallback/teste
+  try{ DATA=JSON.parse(b64urlDecode(dParam)); }catch(e){}
+  (DATA && DATA.nome) ? iniciar() : erro();
+}else if(rParam){                             // link dinâmico: resolve pelo telefone na planilha
+  buscarParticipante(rParam);
+}else{
+  erro();
+}
+
+/* Resolve o responsável pelo token (JSONP) -> dados ao vivo da planilha */
+function buscarParticipante(token){
+  if(!CARDAPIO_API){ erro(); return; }
+  const fn='__part_cb'; let done=false;
+  const fin=(d)=>{ if(done)return; done=true; try{delete window[fn];}catch(e){} (d && d.ok && d.nome) ? (DATA=d, iniciar()) : erro(); };
+  window[fn]=(resp)=>fin(resp);
+  const s=document.createElement('script');
+  s.src=CARDAPIO_API+(CARDAPIO_API.includes('?')?'&':'?')+'acao=participante&r='+encodeURIComponent(token)+'&callback='+fn;
+  s.onerror=()=>fin(null);
+  document.body.appendChild(s);
+  setTimeout(()=>fin(null),8000);
 }
 
 function renderHeader(d){
