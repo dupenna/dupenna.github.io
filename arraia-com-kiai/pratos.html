@@ -86,6 +86,10 @@ body{
 .dish.full .tag-ok{flex:0 0 auto;color:var(--green);font-weight:600;font-size:.82rem}
 
 .loading{text-align:center;color:var(--muted);padding:24px 0;font-size:.95rem}
+.boot{display:flex;flex-direction:column;align-items:center;gap:13px;padding:56px 16px;color:var(--muted)}
+.boot .ring{width:52px;height:52px;border-radius:50%;border:4px solid var(--line);border-top-color:var(--red);animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.boot .t{font-weight:500;font-size:.98rem}
 
 .bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,250,240,.97);backdrop-filter:blur(6px);border-top:1.5px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:20}
 .bar .inner{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:12px}
@@ -113,6 +117,8 @@ footer .osu{font-family:'Rye',serif;color:var(--red);font-size:1rem}
 <body>
 
 <img class="hero-art" src="banner.jpg" onerror="this.onerror=null;this.src='arte.jpg'" alt="Arraiá com Kiai" />
+
+<div class="boot" id="boot"><div class="ring"></div><div class="t">Carregando sua confirmação… 🥋</div></div>
 
 <div id="app" class="wrap" style="display:none">
   <section class="card" id="who">
@@ -208,12 +214,14 @@ const params=new URLSearchParams(location.search);
 const dParam=params.get('d'), rParam=params.get('r');
 
 function iniciar(){
+  document.getElementById('boot').style.display='none';
   renderHeader(DATA);
   REC=(DATA.pessoas||[]).length || DATA.participantes || 1;
   document.getElementById('rec').textContent=REC;
   loadCardapio(onCardapio);
 }
 function erro(){
+  document.getElementById('boot').style.display='none';
   document.getElementById('app').style.display='none';
   document.getElementById('bar').style.display='none';
   document.getElementById('errbox').style.display='block';
