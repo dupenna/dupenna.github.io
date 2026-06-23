@@ -196,7 +196,7 @@ function buscarParticipante(token){
     if(d && d.ok && d.nome){ DATA=d; loadCardapio(onReady); } else erro(); };
   window[fn]=(resp)=>fin(resp);
   const s=document.createElement('script');
-  s.src=CARDAPIO_API+(CARDAPIO_API.includes('?')?'&':'?')+'acao=participante&r='+encodeURIComponent(token)+'&callback='+fn;
+  s.src=CARDAPIO_API+(CARDAPIO_API.includes('?')?'&':'?')+'acao=participante&r='+encodeURIComponent(token)+'&callback='+fn+'&t='+Date.now();
   s.onerror=()=>fin(null);
   document.body.appendChild(s);
   setTimeout(()=>fin(null),8000);
@@ -214,7 +214,7 @@ function loadCardapio(cb){
     }catch(e){ finish(fallbackItens(),true); }
   };
   const s=document.createElement('script');
-  s.src=CARDAPIO_API+(CARDAPIO_API.includes('?')?'&':'?')+'acao=cardapio&callback='+fn;
+  s.src=CARDAPIO_API+(CARDAPIO_API.includes('?')?'&':'?')+'acao=cardapio&callback='+fn+'&t='+Date.now();
   s.onerror=()=>finish(fallbackItens(),true);
   document.body.appendChild(s);
   setTimeout(()=>finish(fallbackItens(),true),8000);
