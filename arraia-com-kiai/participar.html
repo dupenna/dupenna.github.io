@@ -411,7 +411,11 @@ function showStep(step, silent){
   // barra inferior só na etapa de pratos
   document.getElementById('bar').classList.toggle('show', isPratos);
   document.body.classList.toggle('has-bar', isPratos);
-  if(!silent) window.scrollTo({top:0,behavior:'smooth'});
+  if(!silent){
+    const anchor = document.querySelector('.steps');
+    if(anchor) anchor.scrollIntoView({ behavior:'smooth', block:'start' });
+    else window.scrollTo({ top:0, behavior:'smooth' });
+  }
 }
 document.getElementById('tab-pratos').addEventListener('click',()=>showStep('pratos'));
 document.getElementById('tab-pagamento').addEventListener('click',()=>showStep('pagamento'));
