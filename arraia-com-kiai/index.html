@@ -143,6 +143,13 @@ footer .osu{font-family:'Rye',serif;color:var(--red);font-size:1rem}
 .success h2{font-family:'Rye',serif;color:var(--green);font-size:1.9rem;font-weight:400;margin:.1em 0}
 .success p{color:var(--ink);margin:.3em auto 1em;max-width:340px}
 .btn-again{border:1.5px solid var(--green);background:#fff;color:var(--green);font-family:inherit;font-weight:600;padding:11px 20px;border-radius:11px;cursor:pointer}
+.next-card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:18px auto;max-width:390px;text-align:left}
+.next-festa{font-size:.9rem;color:var(--ink);line-height:1.6;background:linear-gradient(180deg,#fff7e6,#fff);border:1.5px solid var(--gold);border-radius:11px;padding:11px 13px}
+.next-festa b{color:var(--red)}
+.next-intro{font-size:.93rem;color:var(--ink);margin:13px 2px;line-height:1.5}
+.next-btn{display:block;text-align:center;text-decoration:none;background:linear-gradient(180deg,var(--red),var(--red-dark));color:#fff;font-family:'Fredoka';font-weight:600;font-size:1.06rem;padding:14px;border-radius:12px;box-shadow:0 6px 16px rgba(184,27,34,.32)}
+.next-link{display:block;text-align:center;margin-top:12px;color:var(--red);font-weight:600;font-size:.9rem;text-decoration:none}
+.next-link:hover{text-decoration:underline}
 
 .err{display:none;background:#fdeaea;border:1.5px solid #f3c2c2;color:#9b1c1c;border-radius:11px;padding:11px 13px;font-size:.88rem;margin-top:12px}
 .err.show{display:block}
@@ -212,6 +219,14 @@ footer .osu{font-family:'Rye',serif;color:var(--red);font-size:1rem}
     <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></div>
     <h2>Presença confirmada!</h2>
     <p id="success-msg">Te esperamos no arraiá. Osu! 🎊</p>
+
+    <div class="next-card">
+      <div class="next-festa">📅 <b>Sábado, 04/07</b>, a partir das 17h<br/>📍 Casa do Miguel — Servidão Hipólito Cassiano de Menezes, 369, Rio Vermelho (Floripa)</div>
+      <p class="next-intro">Próximo passo: escolha o que você vai levar (cada um leva o que puder) e, se quiser, faça a contribuição da festa (R$ 15 por pessoa, opcional). Você também vai receber esses links no seu WhatsApp. 🥋</p>
+      <a class="next-btn" id="go-pratos" href="participar.html">Escolher meus pratos 🍢</a>
+      <a class="next-link" id="go-pag" href="participar.html">Ou ir direto para a contribuição (PIX)</a>
+    </div>
+
     <button class="btn-again" id="again">Confirmar outra família</button>
   </div>
 
@@ -229,6 +244,9 @@ footer .osu{font-family:'Rye',serif;color:var(--red);font-size:1rem}
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz6BVzioeuPPAp1EgAiwA7OALOLNQXTJqRQNEvFGcol_yq4SPNReQhsKLm05h3ng__g7A/exec";
 
 const RELACOES = ["Pai","Mãe","Filho(a)","Irmão(ã)","Cônjuge/Companheiro(a)","Avô/Avó","Amigo(a)","Outro"];
+
+/* token = base64url dos dígitos do telefone (mesmo esquema dos links enviados) */
+function tokenFromDigits(d){ return btoa(d).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
 
 const guestsEl = document.getElementById('guests');
 const emptyMsg = document.getElementById('empty-msg');
@@ -353,6 +371,10 @@ form.addEventListener('submit', async (e)=>{
     }
     document.getElementById('success-msg').textContent =
       `Valeu, ${nome.split(' ')[0]}! ${payload.total === 1 ? 'Sua presença está' : `Vocês ${payload.total} estão`} confirmada${payload.total===1?'':'s'}. Te esperamos no arraiá. Osu! 🎊`;
+    const token = tokenFromDigits(telDigits);
+    const base = 'participar.html?r=' + encodeURIComponent(token);
+    document.getElementById('go-pratos').href = base + '&etapa=pratos';
+    document.getElementById('go-pag').href    = base + '&etapa=pagamento';
     form.style.display = 'none';
     document.getElementById('success').classList.add('show');
     window.scrollTo({top:0,behavior:'smooth'});
