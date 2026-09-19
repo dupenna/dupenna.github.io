@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /arraia-com-kiai/
+Sitemap: https://eduardo.penna.guru/sitemap.xml
